@@ -4,7 +4,16 @@
 <#assign totalLines = 0>
 <#assign value = 0>
 <#assign entryhash = 0>
-<#-- Header Record -->
+
+<#-- File Header Record -->
+<#-- Destino Inmediato (RDFI) -->
+${setPadding(company.bankRouting.custrecord_drt_2663_bank_routing_num ,"left","0",6)}<#rt>
+
+<#-- Origen Inmediato (ODFI) -->
+${setPadding(company.originId.custrecord_2663_drt_frost_ach_company_id ,"left","0",6)}<#rt>
+
+
+
 101 091000019${setLength(cbank.custrecord_2663_ach_id,10)}<#rt>
 ${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["yyMMdd"] ,"left","0",6)}<#rt>
 ${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["HHmm"] ,"left","0",4)}<#rt>
