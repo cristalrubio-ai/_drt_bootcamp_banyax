@@ -1,43 +1,30 @@
 <#-- format specific processing -->
+
+<#function getBlockNumber>
+<#assign processDate = pfa.custrecord_2663_file_creation_timestamp?date?long>
+<#return processDate>
+</#function>
+
+<#function getTipoCuenta cuenta>
+<#assign value = cuenta>
+<#assign result = value>
+<#if value?starts_with("Tarjeta") == true >
+<#assign result = "03">
+<#else>
+<#assign result = "40">
+</#if>
+<#return result>
+</#function>
+
+<#-- template building -->
 #OUTPUT START#
-<#assign recordCount = 0>
-<#assign totalLines = 0>
 <#assign value = 0>
-<#assign entryhash = 0>
-
-<#-- File Header Record -->
-<#-- Destino Inmediato (RDFI) -->
-${setPadding(company.bankRouting.custrecord_drt_2663_bank_routing_num ,"left","0",6)}<#rt>
-
-<#-- Origen Inmediato (ODFI) -->
-${setPadding(company.originId.custrecord_2663_drt_frost_ach_company_id ,"left","0",6)}<#rt>
-
-
-
-101 091000019${setLength(cbank.custrecord_2663_ach_id,10)}<#rt>
-${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["yyMMdd"] ,"left","0",6)}<#rt>
-${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["HHmm"] ,"left","0",4)}<#rt>
-A094101<#rt>
-${setPadding("WELLS FARGO","right"," ",23)}<#rt>
-${setPadding("FIRST CASH HOLDINGS","right"," ",23)}<#rt>
-${setPadding(" ","left"," ",8)}
-<#assign recordCount = recordCount + 1>
-<#-- Batch Header Record -->
-5220<#rt>
-${setPadding("FIRST CASH HOLDINGS","right"," ",16)}<#rt>
-${setPadding(" ","left"," ",20)}${setLength(cbank.custrecord_2663_ach_id,10)}CCD<#rt>
-${setPadding("CASH CONC","right"," ",10)}<#rt>
-${setPadding(pfa.custrecord_2663_process_date?string["yyMMdd"] ,"left","0",6)}<#rt>
-${setPadding(pfa.custrecord_2663_process_date?string["yyMMdd"] ,"left","0",6)}<#rt>
-${setPadding(" ","left"," ",3)}<#rt>
-1091000010000001
-<#assign recordCount = recordCount + 1>
-<#-- Details Record -->
 <#list payments as payment>
 <#assign ebank = ebanks[payment_index]>
-<#assign totalLines = totalLines + 1 >
 <#assign entity = entities[payment_index]>
+<#assign totalLines = totalLines + 1 >
 <#assign value = value + getAmount(payment)>
+<<<<<<< HEAD:BanRegio_template.coffee
 <#assign entryhash = entryhash + (setPadding(ebank.custrecord_2663_entity_bic,"left","0",9)?substring(0,8))?number>
 622<#rt>
 
@@ -90,6 +77,57 @@ ${setPadding(" ","left"," ",39)}<#rt>
 <#list 1..numBlocks as i>
 <#assign padBlocksString = padBlocksString + padding + "\n">
 </#list>
+=======
+${setPadding(cbank.custrecord_drt_numero_de_cuenta,"left","0",18)}<#rt>
+${setPadding(ebank.custrecord_2663_entity_acct_no,"left"," ",35)}<#rt>
+${setPadding(formatAmount(getAmount(payment),"dec"),"left","0",16)}<#rt>
+${setPadding(payment.currency,"left"," ",3)}<#rt>
+
+
+${setPadding(ebank.custrecord_drt_clabe_interbancaria_bbva,"left","0",18)}<#rt>
+${setPadding(cbank.custpage_eft_custrecord_2663_acct_num,"left","0",18)}<#rt>
+MXP<#rt>
+${setPadding(formatAmount(getAmount(payment),"dec"),"left","0",16)}<#rt>
+${setPadding(entity.entityid,"left"," ",30)}<#rt>
+${setPadding(ebank.custrecord_drt_tipo_cuenta_bbva,"left","0",2)}<#rt>
+${setPadding(ebank.custrecord_drt_clave_banco_banxico_bbva,"left","0",3)}<#rt>
+${setPadding(payment.custbody_drt_reference_payment,"left"," ",30)}<#rt>
+${setPadding(payment.custbody_drt_reference_number,"left","0",7)}<#rt>
+H
+>>>>>>> dec12ec18580687c5fca9d05ced1f2af7060fe18:BanRegio_template.txt
 </#if>
-${padBlocksString}<#rt>
+<#if ebank.custrecord_drt_clave_bbva_mixto == "PTC">
+PTC<#rt>
+${setPadding(ebank.custrecord_drt_clabe_interbancaria_bbva,"left","0",18)}<#rt>
+${setPadding(cbank.custpage_eft_custrecord_2663_acct_num,"left","0",18)}<#rt>
+MXP<#rt>
+${setPadding(formatAmount(getAmount(payment),"dec"),"left","0",16)}<#rt>
+${setPadding(payment.custbody_drt_reference_payment,"left"," ",30)}
+</#if>
+<#if ebank.custrecord_drt_clave_bbva_mixto == "CIL">
+CIL<#rt>
+${setPadding(ebank.custrecord_drt_concepto_cie_bbva,"left"," ",30)}<#rt>
+${setPadding(ebank.custrecord_drt_convenio_cie_bbva,"left","0",7)}<#rt>
+${setPadding(cbank.custpage_eft_custrecord_2663_acct_num,"left","0",18)}<#rt>
+${setPadding(formatAmount(getAmount(payment),"dec"),"left","0",16)}<#rt>
+${setPadding(payment.custbody_drt_reference_payment,"left"," ",30)}<#rt>
+${setPadding(ebank.custrecord_drt_referencia_cie_bbva,"left"," ",20)}
+</#if>
+<#if ebank.custrecord_drt_clave_bbva_mixto == "OPI">
+OPI<#rt>
+${setPadding(cbank.custpage_eft_custrecord_2663_acct_num,"left","0",18)}<#rt>
+${setPadding(ebank.custrecord_drt_clabe_interbancaria_bbva,"left","0",35)}<#rt>
+${setPadding(formatAmount(getAmount(payment),"dec"),"left","0",16)}<#rt>
+${setPadding(payment.currency,"left"," ",3)}<#rt>
+${setPadding(payment.custbody_drt_reference_payment,"left"," ",50)}<#rt>
+${setPadding(ebank.custrecord_drt_aba_bic_bbva,"left"," ",15)}<#rt>
+${setPadding(ebank.custrecord_drt_banco_beneficiario_bbva,"left"," ",30)}<#rt>
+${setPadding(ebank.custrecord_drt_pais_beneficiario_bbva,"left"," ",30)}<#rt>
+${setPadding(ebank.custrecord_drt_direccion_beneficiario_bb,"left"," ",40)}<#rt>
+${setPadding(entity.entityid,"left"," ",30)}<#rt>
+${setPadding(entity.billcountry,"left"," ",30)}<#rt>
+${setPadding(payment.custbody_drt_direccion_layout,"left"," ",40)}<#rt>
+${setPadding(entity.phone?replace('+', ''), "left", " ", 12)}
+</#if>
+</#list>
 #OUTPUT END#
