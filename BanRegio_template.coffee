@@ -40,9 +40,26 @@ ${setPadding(" ","left"," ",3)}<#rt>
 <#assign value = value + getAmount(payment)>
 <#assign entryhash = entryhash + (setPadding(ebank.custrecord_2663_entity_bic,"left","0",9)?substring(0,8))?number>
 622<#rt>
-${setPadding(ebank.custrecord_2663_entity_bic,"left","0",9)}<#rt>
-${setPadding(ebank.custrecord_2663_entity_bban,"right"," ",17)}<#rt>
+
+<#-- Inicio building banregio--> 
+<#-- Tipo -->
+${setPadding(payment.custbody_dr_banyax_type_transfer,"left"," ",1)}<#rt>
+
+<#-- cuenta destino -->
+${setPadding(payment.custpage_eft_custrecord_2663_entity_acct_no,"left","0",20)}<#rt>
+
+<#-- cuenta destino -->
 ${setPadding(formatAmount(getAmount(payment),"noDec"),"left","0",10)}<#rt>
+<#-- payment pendiente -->
+
+<#-- cuenta origen -->
+${setPadding(cbank.custpage_eft_custrecord_2663_acct_num,"left","0",20)}<#rt>
+
+<#-- Ref_Numerica -->
+${setPadding(payment.custbody_dr_banyax_ref_number,"left","0",15)}<#rt>
+
+<#-- Fin del building -->
+
 ${setLength(entity.entityid,15)}<#rt>
 ${setLength(entity.companyname,22)}<#rt>
 ${setPadding(" ","left"," ",2)}<#rt>
