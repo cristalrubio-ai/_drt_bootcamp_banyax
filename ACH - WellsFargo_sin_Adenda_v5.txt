@@ -11,7 +11,7 @@
 ${setPadding(cbank.company.bankRouting.custrecord_drt_2663_bank_routing_num ,"left","0",10)}<#rt>
 
 <#-- Origen Inmediato (ODFI) -->
-${setPadding(c.bank.company.originId.custrecord_2663_drt_frost_ach_company_id ,"left","0",10)}<#rt>
+${setPadding(cbank.company.originId.custrecord_2663_drt_frost_ach_company_id ,"left","0",10)}<#rt>
 
 <#-- Fecha de Creacion -->
 ${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["yyMMdd"] ,"left","0",6)}<#rt>  
@@ -19,7 +19,7 @@ ${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["HHmm"] ,"left",
 <#-- No estoy seguro que esto sea asi -->
 
 <-- Nombre Origen -->
-${setPadding(c.bank.company.legalName.custrecord_2663_legal_name,"left"," ",23)}<#rt>
+${setPadding(cbank.company.legalName.custrecord_2663_legal_name,"left"," ",23)}<#rt>
 
 <-- Fin de File Header -->
 
@@ -47,7 +47,7 @@ ${setPadding(cbank.companyIdentification.custrecord_2663_drt_frost_ach_company_i
 $setPadding(pfa.entryDescription.custrecord_2663_ref_note)
 
 <-- ODFI Identification -->
-${setPadding(c.bank.custrecord_drt_2663_bank_routing_num),"left"," ",10}<#rt>  
+${setPadding(cbank.custrecord_drt_2663_bank_routing_num),"left"," ",10}<#rt>  
 <#-- No estoy seguro que esto sea asi -->
 
 ${setPadding("FIRST CASH HOLDINGS","right"," ",16)}<#rt>
