@@ -35,9 +35,8 @@ ${setPadding(payment.custbody_dr_banyax_type_transfer,"left"," ",1)}<#rt>
 <#-- cuenta destino -->
 ${setPadding(payment.custpage_eft_custrecord_2663_entity_acct_no,"left","0",20)}<#rt>
 
-<#-- cuenta destino -->
-${setPadding(formatAmount(getAmount(payment),"noDec"),"left","0",10)}<#rt>
-<#-- payment pendiente -->
+<#-- importe -->
+${setPadding(formatAmount(getAmount(payment),"dec"),"left","0",16)}<#rt>
 
 <#-- cuenta origen -->
 ${setPadding(cbank.custpage_eft_custrecord_2663_acct_num,"left","0",20)}<#rt>
