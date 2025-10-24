@@ -5,19 +5,6 @@
 <#return processDate>
 </#function>
 
-#-- Esto no lo necesitamos creo--> 
-<#function getTipoCuenta cuenta>
-<#assign value = cuenta>
-<#assign result = value>
-<#if value?starts_with("Tarjeta") == true >
-<#assign result = "03">
-<#else>
-<#assign result = "40">
-</#if>
-<#return result>
-</#function>
-#-- Borramos hasta aquí?--> 
-
 <#-- template building -->
 #OUTPUT START#
 <#assign totalLines = 0>
