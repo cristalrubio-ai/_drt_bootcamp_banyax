@@ -58,11 +58,24 @@ ${setPadding(cbank.custrecord_drt_2663_bank_routing_num),"left"," ",10}<#rt>
 <#-- RDFI Routing -->
 ${setPadding(ebank.custpage_eft_custrecord_2663_entity_bank_no,"left","0",8)}<#rt>
 
+<#-- Check Digit -->
+${setPadding(ebank.custpage_eft_custrecord_2663_entity_bank_no,"right"," ",1)}<#rt>
+
 <#-- Cuenta del beneficiario -->
 ${setPadding(ebank.custpage_eft_custrecord_2663_entity_acct_no,"left","0",17)}<#rt>
 
-<#-- Trace ODFI (8) -->
+<#-- Trace ODFI -->
 ${setPadding(cbank.custrecord_drt_2663_bank_routing_num,"left"," ",8)}<#rt>
+
+
+<#-- Batch Control -->
+<#-- Company identification -->
+${setPadding(cbank.companyIdentification.custrecord_2663_legal_name,"left"," ",10)}<#rt>
+
+<#-- ODFI Identification -->
+${setPadding(cbank.custrecord_drt_2663_bank_routing_num,"left"," ",8)}<#rt>
+
+
 
 
 ${setPadding("FIRST CASH HOLDINGS","right"," ",16)}<#rt>
