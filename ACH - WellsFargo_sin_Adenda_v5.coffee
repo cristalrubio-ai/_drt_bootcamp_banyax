@@ -43,12 +43,40 @@ ${setPadding(pfa.company.discretionary.custrecord_2663_ref_note),"left"," ",20}<
 <#-- ID de la Empresa -->
 ${setPadding(cbank.companyIdentification.custrecord_2663_drt_frost_ach_company_id),"left"," ",10}<#rt>
 
-<-- Descripción de la Entrada -->
+<#-- Descripción de la Entrada -->
 $setPadding(pfa.entryDescription.custrecord_2663_ref_note)
 
-<-- ODFI Identification -->
+<#-- Fecha efectiva -->
+${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["yyMMdd"] ,"left","0",6)}<#rt>  
+
+<#-- ODFI Identification -->
 ${setPadding(cbank.custrecord_drt_2663_bank_routing_num),"left"," ",10}<#rt>  
 <#-- No estoy seguro que esto sea asi -->
+
+
+<#-- Entry Details -->
+<#-- RDFI Routing -->
+${setPadding(ebank.custpage_eft_custrecord_2663_entity_bank_no,"left","0",8)}<#rt>
+
+<#-- Check Digit -->
+${setPadding(ebank.custpage_eft_custrecord_2663_entity_bank_no,"right"," ",1)}<#rt>
+
+<#-- Cuenta del beneficiario -->
+${setPadding(ebank.custpage_eft_custrecord_2663_entity_acct_no,"left","0",17)}<#rt>
+
+<#-- Trace ODFI -->
+${setPadding(cbank.custrecord_drt_2663_bank_routing_num,"left"," ",8)}<#rt>
+
+
+<#-- Batch Control -->
+<#-- Company identification -->
+${setPadding(cbank.companyIdentification.custrecord_2663_legal_name,"left"," ",10)}<#rt>
+
+<#-- ODFI Identification -->
+${setPadding(cbank.custrecord_drt_2663_bank_routing_num,"left"," ",8)}<#rt>
+
+
+
 
 ${setPadding("FIRST CASH HOLDINGS","right"," ",16)}<#rt>
 ${setPadding(" ","left"," ",20)}${setLength(cbank.custrecord_2663_ach_id,10)}CCD<#rt>

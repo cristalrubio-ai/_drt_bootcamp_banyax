@@ -26,6 +26,9 @@
     <#assign entity = entities[payment_index]>
     <#assign totalLines = totalLines + 1 >
 
+<#if payment??>
+<#-- Aqui era el IF faltante-->
+
     <#-- Inicio building banregio--> 
     <#-- Tipo -->
     ${setPadding(payment.custbody_dr_banyax_type_transfer,"left"," ",1)},<#rt>
