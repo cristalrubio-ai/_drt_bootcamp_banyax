@@ -5,6 +5,7 @@
 <#return processDate>
 </#function>
 
+#-- Esto no lo necesitamos creo--> 
 <#function getTipoCuenta cuenta>
 <#assign value = cuenta>
 <#assign result = value>
@@ -15,6 +16,7 @@
 </#if>
 <#return result>
 </#function>
+#-- Borramos hasta aquí?--> 
 
 <#-- template building -->
 #OUTPUT START#
@@ -43,6 +45,6 @@
 </#list>
 <#-- Pintar contador -->
 <#-- Total de líneas generadas -->
-${totalLines},<#rt>
+${totalLines}<#rt>
 
 #OUTPUT END#
