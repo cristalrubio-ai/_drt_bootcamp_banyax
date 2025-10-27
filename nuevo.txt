@@ -1,4 +1,10 @@
+<#-- Reference Fields -->
 <refFields type="Banregio">
 	<refField id='custrecord_2663_country_code' label='Customer Country Code' mandatory="true" helptext="Enter the 3-digit code that identifies the country where the company’s account is based. The suggested value for Mexico is: 485."/>
-	<refField id='custrecord_2663_acct_num' label='Account Number' mandatory="true" helptext="Enter your company's bank account number where the funds will be debited (11 digits)."/>
+	<refField id='custrecord_2663_acct_num' label='Account Number' mandatory="true" helptext="Enter your company's bank account number where the funds will be debited (18 digits)."/>
 </refFields>
+
+<#-- Entity Reference Fields -->
+<EntityRefFields type="BBVA Mexico">
+    <refField id='custrecord_2663_entity_acct_no' label='Third Party Account Number' mandatory='true'  helptext="Account or CLABE of the supplier/beneficiary (18 digits if using SPEI)."></refField>
+</EntityRefFields>
