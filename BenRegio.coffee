@@ -14,7 +14,6 @@
     <#assign totalLines = totalLines + 1 >
 
 <#if payment??>
-<#-- Aqui era el IF faltante-->
 
     <#-- Inicio building banregio--> 
     <#-- Tipo -->

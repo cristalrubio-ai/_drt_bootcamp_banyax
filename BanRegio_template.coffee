@@ -48,7 +48,7 @@ ${setPadding(payment.custbody_dr_banyax_ref_number,"left","0",15)}<#rt>
 ${setLength(entity.entityid,15)}<#rt>
 ${setLength(entity.companyname,22)}<#rt>
 ${setPadding(" ","left"," ",2)}<#rt>
-009100001${setPadding((payment_index?number + 1),"left","0",7)}
+009100001 ${setPadding((payment_index?number + 1),"left","0",7)}
 <#assign recordCount = recordCount + 1>
 </#list>
 <#assign recordCount = recordCount + 1>

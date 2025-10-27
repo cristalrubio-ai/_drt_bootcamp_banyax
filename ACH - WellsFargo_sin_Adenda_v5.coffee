@@ -18,10 +18,10 @@ ${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["yyMMdd"] ,"left
 ${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["HHmm"] ,"left","0",4)}<#rt>
 <#-- No estoy seguro que esto sea asi -->
 
-<-- Nombre Origen -->
+<#-- Nombre Origen -->
 ${setPadding(cbank.company.legalName.custrecord_2663_legal_name,"left"," ",23)}<#rt>
 
-<-- Fin de File Header -->
+<#-- Fin de File Header -->
 
 101 091000019${setLength(cbank.custrecord_2663_ach_id,10)}<#rt>
 A094101<#rt>
