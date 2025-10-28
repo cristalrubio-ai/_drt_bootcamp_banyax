@@ -19,9 +19,9 @@
 
 <#-- File Header Record -->
     101<#rt>
-    <#-- Record Type Code (No estoy segura si es así :v) -->
-    ${setPadding(CustomRecordType.custrecord_2663_drt_frost_ach_file_type.custrecord_2663_drt_frost_ach_file_type_code ,"left","0",1)}<#rt>
-    <#-- Priority code estándar de NACHA-->
+    <#-- Record Type Code (fijo '1') -->
+    ${setPadding("1","left","0",1)}<#rt> 
+    <#-- Priority code estándar de NACHA (fijo '01')-->
     ${setPadding("01" ,"left","0",2)}<#rt>
     <#-- Destino Inmediato (RDFI) -->
     ${setPadding(cbank.company.bankRouting.custrecord_drt_2663_bank_routing_num ,"left","0",10)}<#rt>
@@ -34,13 +34,21 @@
     <#-- No estoy seguro que esto sea asi -->
     <#-- File ID Modifier (crear lógica) -->
     ${setPadding(getNextFileId(),"left"," ",1)}<#rt>
+    <#-- Record Size (fijo '094') -->
+    ${setPadding("094","left","0",3)}<#rt>
+    <#-- Blocking Factor (fijo '10') -->
+    ${setPadding("10","left","0",2)}<#rt>
+    <#-- Format Code (fijo '1') -->
+    ${setPadding("1","left","0",1)}<#rt>
+    <#-- Immediate Destination Name (fijo 'FROST BANK') -->
+    ${setPadding("FROST BANK","right"," ",23)}<#rt>
     <#-- Nombre Origen -->
     ${setPadding(cbank.company.legalName.custrecord_2663_legal_name,"left"," ",23)}<#rt>
 <#-- Fin de File Header -->
 
 101 111000015${setLength(cbank.custrecord_2663_ach_id,10)}<#rt>
 A094101<#rt>
-${setPadding("FROST BANK","right"," ",23)}<#rt>
+
 ${setPadding("FIRST CASH HOLDINGS","right"," ",23)}<#rt>
 ${setPadding(" ","left"," ",8)}
 <#assign recordCount = recordCount + 1>
