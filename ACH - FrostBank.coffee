@@ -44,37 +44,43 @@
     ${setPadding("FROST BANK","right"," ",23)}<#rt>
     <#-- Nombre Origen -->
     ${setPadding(cbank.company.legalName.custrecord_2663_legal_name,"left"," ",23)}<#rt>
+    <#-- Reference Code (fijo vacio) -->
+    ${setPadding(" ","left"," ",8)}<#rt>
 <#-- Fin de File Header -->
 
-101 111000015${setLength(cbank.custrecord_2663_ach_id,10)}<#rt>
-A094101<#rt>
-
-${setPadding("FIRST CASH HOLDINGS","right"," ",23)}<#rt>
-${setPadding(" ","left"," ",8)}
+<#-- Increment record counter for ACH file validation -->
 <#assign recordCount = recordCount + 1>
-
 
 <#-- Batch Header Record -->
     5220<#rt>
-
+    <#-- Record Type Code (fijo '5')-->
+    ${setPadding("5","left","0",1)}<#rt> 
+    <#-- Service Class Code (fijo '200')-->
+    ${setPadding("220" ,"left","0",3)}<#rt>
     <#-- Nombre de la Empresa -->
     ${setPadding(cbank.company.name.custrecord_2663_legal_name,"left"," ",16)}<#rt>
-
     <#-- Dato discrecional -->
     ${setPadding(pfa.company.discretionary.custrecord_2663_ref_note),"left"," ",20}<#rt>
-
     <#-- ID de la Empresa -->
     ${setPadding(cbank.companyIdentification.custrecord_2663_drt_frost_ach_company_id),"left"," ",10}<#rt>
-
+    <#-- Standard Entry Class (SEC) Code -->
+    ${setPadding("CCD","right"," ",3)}<#rt>
     <#-- Descripción de la Entrada -->
     ${setPadding(pfa.entryDescription.custrecord_2663_ref_note,"left"," ",10)}<#rt>
-
+    <#-- Fecha descriptiva (op)-->
+    
     <#-- Fecha efectiva -->
     ${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["yyMMdd"] ,"left","0",6)}<#rt>  
-
-    <#-- ODFI Identification -->
-    ${setPadding(cbank.custrecord_drt_2663_bank_routing_num),"left"," ",10}<#rt>  
-    <#-- No estoy seguro que esto sea asi -->
+    <#-- Settlement Date (dejar en blanco)-->
+    ${setPadding(" ","left","0",3)}<#rt>
+    <#-- Originator Status Code (fijo '1')-->
+    ${setPadding("1","left","0",1)}<#rt>
+    <#-- Originating DFI Identification -->
+    ${setPadding(cbank.custrecord_drt_2663_bank_routing_num,"left"," ",8)}<#rt>
+    <#assign batchNumber = 1>
+    <#-- Batch Number -->
+    ${setPadding(batchNumber?string, "left", "0", 7)}<#rt>
+    <#assign batchNumber = batchNumber + 1>
 <#-- Fin de Batch Header Record -->
 
 <#-- Entry Details -->
