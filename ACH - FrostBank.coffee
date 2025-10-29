@@ -83,18 +83,32 @@
     <#assign batchNumber = batchNumber + 1>
 <#-- Fin de Batch Header Record -->
 
-<#-- Entry Details -->
+<#-- Entry Detail Record-->
+    <#-- Record Type Code (fijo '6') -->
+    ${setPadding("6","left","0","1")}<#rt>
+    <#-- Transaction Code: 2-digit code identifying the transaction type at the receiving bank. Revisar lógica!! -->
+    ${setPadding("22","left","0","2")}<#rt>
     <#-- RDFI Routing -->
     ${setPadding(ebank.custpage_eft_custrecord_2663_entity_bank_no,"left","0",8)}<#rt>
-
     <#-- Check Digit -->
     ${setPadding(ebank.custpage_eft_custrecord_2663_entity_bank_no,"right"," ",1)}<#rt>
-
     <#-- Cuenta del beneficiario -->
     ${setPadding(ebank.custpage_eft_custrecord_2663_entity_acct_no,"left","0",17)}<#rt>
-
+    <#-- Amount: Transaction amount in dollars with two decimal positions. Enter 10 zeros for prenotes.-->
+    ${setPadding(formatAmount(getAmount(payment),"noDec"),"left","0",10)}<#rt>
+    <#-- Individual Identification Number (op) -->
+    ${setPadding(" ","left"," ",15)}<#rt>
+    <#-- Individual Name -->
+    ${setPadding(entity.entityid,"left"," ",22)}<#rt>
+    <#-- Discretionary Data (op) -->
+    ${setPadding(" ","left"," ",2)}<#rt>
+    <#-- Addenda Record Indicator (fijo '0' si no hay addenda) -->
+    ${setPadding("0","left","0",1)}<#rt>
     <#-- Trace ODFI -->
     ${setPadding(cbank.custrecord_drt_2663_bank_routing_num,"left"," ",8)}<#rt>
+    <#-- Trace Number -->
+    ${setPadding("0000001","left","0",7)}
+    <#assign recordCount = recordCount + 1>
 <#-- Fin de Entry Details -->
 
 <#-- Batch Control -->
