@@ -41,25 +41,25 @@ ${setPadding(" ","left"," ",8)}<#rt>
 <#assign recordCount = recordCount + 1>
 <#-- Fin de File Header -->
 
-<#-- Batch Header Record -->
+<#-- Batch Header Record --> 
 <#-- Record Type Code (fijo '5')-->
 ${setPadding("5","left","0",1)}<#rt> 
 <#-- Service Class Code (fijo '220')-->
 ${setPadding("220" ,"left","0",3)}<#rt>
 <#-- Nombre de la Empresa -->
-${setPadding(cbank.company.name.custrecord_2663_legal_name,"left"," ",16)}<#rt>
+${setPadding(cbank.custrecord_2663_legal_name,"left"," ",16)}<#rt>
 <#-- Dato discrecional -->
-${setPadding(pfa.company.discretionary.custrecord_2663_ref_note,"left"," ",20)}<#rt>
+${setPadding(pfa.custrecord_2663_ref_note,"left"," ",20)}<#rt>
 <#-- ID de la Empresa -->
-${setPadding(cbank.companyIdentification.custrecord_2663_acct_num, "left", " ", 10)}<#rt>
+${setPadding(cbank.custrecord_2663_acct_num, "left", " ", 10)}<#rt>
 <#-- Standard Entry Class (SEC) Code -->
 ${setPadding("CCD","left"," ",3)}<#rt>
 <#-- Descripción de la Entrada -->
-${setPadding(pfa.entryDescription.custrecord_2663_ref_note,"left"," ",10)}<#rt>
+${setPadding(pfa.custrecord_2663_ref_note,"left"," ",10)}<#rt>
 <#-- Fecha descriptiva (op)-->
-${setPadding(pfa.descriptiveDate?string["yyMMdd"] ,"left","0",6)}<#rt>
+${setPadding(pfa.descriptiveDate?string["yyMMdd"] ,"left","0",6)}<#rt> <#-- Esta probablemente esta mal, falta confirmar en el mapeo de netsuite -->
 <#-- Fecha efectiva -->
-${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["yyMMdd"] ,"left","0",6)}<#rt>  
+${setPadding(pfa.custrecord_2663_file_creation_timestamp?string["yyMMdd"] ,"left","0",6)}<#rt>  <#-- Esta probablemente esta mal, falta confirmar en el mapeo de netsuite -->
 <#-- Settlement Date (dejar en blanco)-->
 ${setPadding(" ","left","0",3)}<#rt>
 <#-- Originator Status Code (fijo '1')-->
@@ -75,10 +75,8 @@ ${setPadding("1","left","0",7)}<#rt>
 <#assign ebank = ebanks[payment_index]>
 <#assign entity = entities[payment_index]>
 
-### Asign para amount ###
 <#assign monto = getAmount(payment)?number>
 
-### Logica para amount ###
 <#if monto == 0>
   <#assign montoTxt = "0000000000">
 <#else>
@@ -156,10 +154,9 @@ ${setPadding("1","left","0",7)}<#rt>
 <#assign totalSuma = 0>
 <#list routing8 as numero>
 <#assign totalSuma = totalSuma + numero>
-### Logica para el entryhash ###
 
-<#assign totalCount = entries?size> ### Este calcula la secuancia de entries, entries?size es un built-in que devuelve la cantiadad de elementos en una secuencia. ###
-### Logica para  entryhash ###
+
+<#assign totalCount = entries?size> 
 
 <#-- Tipo de registro (Fijo '9') -->
 ${setPadding("9","left","0",1)}<#rt>
